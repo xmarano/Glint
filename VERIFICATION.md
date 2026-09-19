@@ -1,16 +1,18 @@
 # Verification
 
-This record covers the Codex-based v1.0.0 MVP in release preparation. It distinguishes automated coverage from manual checks; it does not certify a published release or every supported macOS configuration.
+This record covers the Codex-based v1.0.0 MVP. It distinguishes automated coverage from manual checks; it does not certify every supported macOS configuration or notarized distribution.
 
 ## Recorded results
 
-Latest recorded checks: **2026-09-18**. Compilation/testing used Swift 6.4 and Apple Command Line Tools; live integration was checked with Codex CLI 0.153.4. The deployment target is macOS 14+, not a claim that every OS/toolchain combination has been tested.
+Release-gate checks: **2026-09-19 UTC**. Local compilation/testing used Swift 6.4 and Apple Command Line Tools. Hosted CI used Xcode 16.4's Swift 6.1.2 toolchain. Earlier live integration was checked with Codex CLI 0.153.4. The deployment target is macOS 14+, not a claim that every OS/toolchain combination has been tested.
 
 | Check | Result |
 | --- | --- |
 | Clean release build and ad-hoc signature validation | Passed |
 | `make help`, default help, `make app run` | Passed |
 | `make verify`: syntax, build, default tests, signature | Passed |
+| Hosted macOS CI: SwiftPM release build, default tests, signature | [Passed](https://github.com/xmarano/Glint/actions/runs/35409663739) |
+| Source, About-panel, and generated bundle version | `1.0.0` |
 | Live-enabled suite | All 26 tests across four suites passed |
 | Real arithmetic request | `144` |
 | Real Python request | `[x**2 for x in range(1, 11)]` (whitespace-normalized comparison) |
@@ -18,7 +20,7 @@ Latest recorded checks: **2026-09-18**. Compilation/testing used Swift 6.4 and A
 | Cleanup refusal for symlinked build locations | Passed |
 | Publication-candidate source/image review | No recognizable credentials or personal paths detected |
 
-The live suite and native smoke results are from implementation verification; documentation-only changes do not imply a new live run. The default suite has 26 declared tests and intentionally skips the live-provider test. Two CLT linker warnings about nonexistent toolchain search directories remain; builds and tests succeed. Full Xcode builds and a cross-version macOS matrix remain unverified.
+The live suite and native smoke results are from implementation verification; release preparation did not send new live requests. The default suite has 26 declared tests: 25 executed successfully and the live-provider test was intentionally skipped, locally and in CI. Two CLT linker warnings about nonexistent toolchain search directories remain; builds and tests succeed. Native Xcode project builds and a cross-version macOS matrix remain unverified; CI builds the Swift package with the Xcode toolchain.
 
 ## Reproduce the checks
 
@@ -43,13 +45,13 @@ Do not run live credentials against untrusted test code.
 
 ## Hosted CI
 
-The [CI workflow](.github/workflows/ci.yml) is prepared for pushes to `main` and pull requests targeting `main`. **Remote execution: NOT RUN / PENDING** until publication. Local verification does not establish a hosted-runner pass.
+The [CI workflow](.github/workflows/ci.yml) runs for pushes to `main` and pull requests targeting `main`. The [initial publication run passed](https://github.com/xmarano/Glint/actions/runs/35409663739). Consult [current CI runs](https://github.com/xmarano/Glint/actions/workflows/ci.yml) for subsequent revisions; a prior pass is not evidence for an untested revision.
 
 The job uses `macos-15` and selects its preinstalled Xcode 16.4 through `DEVELOPER_DIR`. The [runner inventory](https://github.com/actions/runner-images/blob/main/images/macos/macos-15-arm64-Readme.md) documents that installation. This constrains the toolchain without downloading one or embedding development-machine paths. Review the selection when runner images retire toolchains; a missing installation should fail visibly.
 
 After checkout, CI prints only OS version, architecture, Xcode/Swift versions, and SDK version. `make verify` performs script/project syntax checks, the release build, the default tests, and ad-hoc signature verification in one pass. The existing test script retains dynamic CLT compatibility handling for local development; CI uses full Xcode. There is no dependency on a downloaded Apple Intelligence model or installed Codex CLI.
 
-`GLINT_LIVE_TESTS=0` and `GLINT_SMOKE_LIVE=0` explicitly prohibit the existing opt-in live checks. The workflow uses only the official checkout action, disables checkout credential persistence, grants only `contents: read`, sets a 20-minute job limit, and cancels superseded runs. It has no secret references, uploads, signing credentials, release actions, or privileged pull-request trigger. Default desktop tests remain enabled; their graphical-session assumptions and full-Xcode compilation still require validation on the actual runner.
+`GLINT_LIVE_TESTS=0` and `GLINT_SMOKE_LIVE=0` explicitly prohibit the existing opt-in live checks. The workflow uses only the official checkout action, disables checkout credential persistence, grants only `contents: read`, sets a 20-minute job limit, and cancels superseded runs. It has no secret references, uploads, signing credentials, release actions, or privileged pull-request trigger. Default desktop tests remain enabled and passed on the hosted runner. The separate native smoke harness and real-app manual acceptance checklist are not part of CI.
 
 Phase 5 local validation (2026-09-18): clean release build, standalone default suite, and `make verify` passed. Both test runs declared 26 tests across four suites: 25 executed successfully and the live-provider test was intentionally skipped. YAML parsing, workflow trigger/permission/live-test contracts, embedded shell syntax, referenced files, relative documentation links, and the badge target passed local checks. The 53-file publication candidate scan found no recognizable credentials or personal paths; generated artifacts remain excluded. `actionlint` was not installed, so this is not an actionlint or hosted-runner result. No live AI request was made in this phase.
 

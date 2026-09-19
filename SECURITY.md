@@ -4,7 +4,7 @@
 
 Do **not** disclose vulnerabilities, exploit details, tokens, personal data, or sensitive screenshots in public issues, pull requests, discussions, or logs.
 
-Prefer [GitHub private vulnerability reporting for Glint](https://github.com/xmarano/Glint/security/advisories/new) when the repository’s **Report a vulnerability** option is available. This feature must be enabled by a repository administrator; this policy file alone does not enable it, and its availability has not been confirmed as part of release preparation.
+Use [GitHub private vulnerability reporting for Glint](https://github.com/xmarano/Glint/security/advisories/new). Private reporting is enabled for this public repository; choose **Report a vulnerability** in its Security tab.
 
 If private reporting is unavailable, open an issue containing **only** a request such as “Please enable private vulnerability reporting or provide a private reporting channel.” Do not include the vulnerability, affected component, reproduction details, or attachments. Wait for a private channel before sharing sensitive information. This follows [GitHub’s reporting guidance](https://docs.github.com/en/code-security/how-tos/report-and-fix-vulnerabilities/report-privately).
 
@@ -18,7 +18,7 @@ Even in private reports, omit real credentials and unrelated personal data. Coor
 
 ## Scope and version status
 
-The current documented baseline is the Codex-based **v1.0.0 MVP in release preparation**. Report issues against the current source, identifying a revision when available. No v1.0.0 tag or release is established by these documentation files. Apple Foundation Models, Screen mode, Claude, and provider switching are not implemented or covered as existing features.
+The current baseline is the Codex-based **v1.0.0 MVP**. Report issues against the current source, identifying a revision when available. Apple Foundation Models, Screen mode, Claude, and provider switching are not implemented or covered as existing features.
 
 ## Security boundaries
 

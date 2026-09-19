@@ -2,7 +2,7 @@
 
 Target: [xmarano/Glint](https://github.com/xmarano/Glint).
 
-These are proposed GitHub settings, not a claim that remote settings have been applied.
+The current v1.0.0 description and topics below are applied to the public repository. Private vulnerability reporting is enabled and verified. Future metadata remains a proposal only.
 
 ## Current description — v1.0.0
 
@@ -32,15 +32,15 @@ Consider `screen-capture` after explicit Screen mode ships and `claude-code` aft
 
 README currently uses three local static SVG badges: macOS 14+, Swift 6, and MIT. They do not depend on an external badge service, remote release, or workflow.
 
-- CI badge: targets `xmarano/Glint/actions/workflows/ci.yml` on `main`. The workflow exists locally; its remote status endpoint cannot be validated before publication. Hosted execution is pending, not a reported pass.
+- CI badge: targets `xmarano/Glint/actions/workflows/ci.yml` on `main`. Hosted CI has run successfully; the badge reflects the remote workflow status.
 - Release badge: add only after the first tag/release is published. Do not display an unreleased version as a published download.
 
-## Before v1.0.0 publication
+## Release checklist
 
 - Verify the repository destination and intended public files; keep generated artifacts excluded.
-- Enable and verify GitHub private vulnerability reporting. `SECURITY.md` includes a safe fallback if it is unavailable.
+- Keep GitHub private vulnerability reporting enabled. `SECURITY.md` includes a safe fallback if it becomes unavailable.
 - App version metadata is synchronized to `1.0.0` in `Resources/Info.plist` and the About panel in `Sources/App/GlintApp.swift`. Verify the rebuilt bundle matches before tagging.
-- Complete release verification, then date the changelog entry when a release actually exists.
+- Require passing CI on the exact release commit before tagging. Verify tag and release targets; publish source only unless distribution artifacts have been separately reviewed.
 - Reviewed README captures contain an earlier input-panel mark. Keep that caption, or replace them only with newly reviewed authentic captures; never use the excluded Settings image.
 
-No license decision remains pending: the project uses MIT, Copyright (c) 2026 xmarano. Preparing these files does not initialize Git, apply remote settings, execute remote CI, publish artifacts, or create a release.
+No license decision remains pending: the project uses MIT, Copyright (c) 2026 xmarano. App signing/notarization and all v1.1.0 feature work remain separate from the v1.0.0 source release.

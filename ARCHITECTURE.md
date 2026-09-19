@@ -1,6 +1,6 @@
 # Architecture
 
-This document describes the Codex-based v1.0.0 MVP in release preparation. Glint is a macOS accessory application with an AppKit lifecycle and SwiftUI content. Everything visible runs on the main actor. The provider and process runner do not depend on UI types. Codex is the only implemented provider; Apple Foundation Models, Screen mode, Claude, multimodal requests, and provider switching remain planned work.
+This document describes the Codex-based v1.0.0 MVP. Glint is a macOS accessory application with an AppKit lifecycle and SwiftUI content. Everything visible runs on the main actor. The provider and process runner do not depend on UI types. Codex is the only implemented provider; Apple Foundation Models, Screen mode, Claude, multimodal requests, and provider switching remain planned work.
 
 ```text
 AppDelegate / menu bar

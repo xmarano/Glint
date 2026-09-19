@@ -2,7 +2,7 @@
 
 Versions follow Semantic Versioning (`v1.0.0`, not `v.1.0.0`). An unreleased entry describes the release being prepared, not an available tag or download.
 
-## v1.0.0 — Unreleased
+## v1.0.0 — 2026-09-19
 
 Initial Codex-based macOS MVP. The following capabilities are implemented in the current source:
 
@@ -28,5 +28,10 @@ Initial Codex-based macOS MVP. The following capabilities are implemented in the
 - Shared Swift package/Xcode source layout, optional Make commands, and build/test/verification scripts.
 - Provider, coordinator, desktop, and security regression tests; live acceptance checks remain opt-in.
 - MIT license, contributor/security documentation, and reviewed UI previews.
+- GitHub-hosted macOS CI with provider-independent tests, read-only permissions, and no live AI requests.
+
+### Distribution
+
+- Source release only; no prebuilt, Developer ID-signed, or notarized application is attached.
 
 Apple Foundation Models, Apple Intelligence integration, Screen mode, Claude, multimodal requests, and provider switching are **not included**. Planned work is described in the [roadmap](README.md#roadmap); it is not a v1.1.0 release entry.

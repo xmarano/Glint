@@ -15,7 +15,7 @@ Glint is a lightweight macOS menu bar assistant. Ask from a floating input above
 
 **Shortcut → ask → Enter → copied → ⌘V.** No chat window to manage, no automatic typing into your documents.
 
-This README describes the **v1.0.0 Codex MVP, currently in release preparation**. Apple Foundation Models, on-device generation, Screen mode, Claude, and provider switching are planned—not available in v1.0.0.
+This README describes the **v1.0.0 Codex MVP**. Apple Foundation Models, on-device generation, Screen mode, Claude, and provider switching are planned—not available in v1.0.0.
 
 ## A small interface, out of your way
 
@@ -59,7 +59,7 @@ Apple Intelligence is **not required** for v1.0.0. Native macOS UI does not mean
 
 ## Build and first run
 
-From a source checkout:
+v1.0.0 is a source release; no prebuilt or notarized application is provided. From a source checkout:
 
 ```sh
 cd Glint
@@ -116,7 +116,7 @@ GLINT_LIVE_TESTS=1 make test
 
 For a clean check, run `make clean` then `make verify`; do not run independent build/clean commands concurrently. See [CONTRIBUTING.md](CONTRIBUTING.md) and [VERIFICATION.md](VERIFICATION.md) for test coverage and the native smoke harness.
 
-[CI](.github/workflows/ci.yml) runs `make verify` on macOS for pushes to `main` and pull requests targeting `main`, with live AI tests disabled and no Codex credentials required. The workflow is prepared for publication; hosted execution and its badge remain pending until pushed and run on GitHub. No release badge is shown before a release exists.
+[CI](.github/workflows/ci.yml) runs `make verify` on macOS for pushes to `main` and pull requests targeting `main`, with live AI tests disabled and no Codex credentials required. The badge links to actual GitHub Actions results; see [VERIFICATION.md](VERIFICATION.md) for recorded coverage and remaining manual checks.
 
 ## Architecture
 
