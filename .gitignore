@@ -1,0 +1,50 @@
+# Swift / Xcode products and local state
+.build/
+/build/
+DerivedData/
+xcuserdata/
+*.xcuserstate
+*.app/
+*.dSYM/
+_CodeSignature/
+
+# Finder and editor debris
+.DS_Store
+._*
+*.swp
+*.swo
+*~
+*.tmp
+/tmp/
+
+# Local configuration and credentials (review examples before committing)
+.env
+.env.*
+!.env.example
+*.local.xcconfig
+*.local.json
+*.local.toml
+.codex/
+.claude/
+.netrc
+.npmrc
+auth.json
+credentials.json
+*.p12
+*.pfx
+*.key
+*.pem
+*.mobileprovision
+*.provisionprofile
+
+# Logs, diagnostics, test results and coverage
+*.log
+*.xcactivitylog
+*.crash
+*.ips
+*.xcresult/
+*.profraw
+*.profdata
+
+# Not reviewed for publication; documentation uses only approved previews.
+settings-preview.png

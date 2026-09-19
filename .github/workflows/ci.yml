@@ -1,0 +1,46 @@
+name: CI
+
+"on":
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: Build and test macOS
+    runs-on: macos-15
+    timeout-minutes: 20
+    env:
+      # Preinstalled on this runner image; no toolchain download or local CLT paths.
+      DEVELOPER_DIR: /Applications/Xcode_16.4.app/Contents/Developer
+      GLINT_LIVE_TESTS: "0"
+      GLINT_SMOKE_LIVE: "0"
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Show toolchain information
+        run: |
+          sw_vers -productVersion
+          uname -m
+          xcodebuild -version
+          swift --version
+          xcrun --sdk macosx --show-sdk-version
+
+      - name: Build, test, and verify
+        # Includes release build, default tests, syntax checks, and ad-hoc signature verification.
+        # No installed Codex, credentials, live AI requests, or artifact publication required.
+        run: make verify
